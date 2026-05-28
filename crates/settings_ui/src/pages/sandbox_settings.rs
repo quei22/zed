@@ -117,6 +117,21 @@ pub(crate) fn render_sandbox_settings_page(
                 .child(SettingsSectionHeader::new("Filesystem").no_padding(true))
                 .child(
                     SwitchField::new(
+                        "sandbox-allow-git-access",
+                        Some("Allow Git Metadata Access"),
+                        Some(
+                            "Let sandboxed commands access protected Git metadata without prompting."
+                                .into(),
+                        ),
+                        permissions.allow_git_access,
+                        move |state, _window, cx| {
+                            set_allow_git_access(*state == ToggleState::Selected, cx);
+                        },
+                    )
+                    .tab_index(0),
+                )
+                .child(
+                    SwitchField::new(
                         "sandbox-allow-fs-write-all",
                         Some("Allow All Filesystem Writes"),
                         Some(
@@ -418,6 +433,12 @@ fn update_sandbox_permissions(
 fn set_allow_all_hosts(value: bool, cx: &mut App) {
     update_sandbox_permissions(cx, move |permissions| {
         permissions.allow_all_hosts = Some(value);
+    });
+}
+
+fn set_allow_git_access(value: bool, cx: &mut App) {
+    update_sandbox_permissions(cx, move |permissions| {
+        permissions.allow_git_access = Some(value);
     });
 }
 
