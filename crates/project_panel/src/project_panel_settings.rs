@@ -31,6 +31,7 @@ pub struct ProjectPanelSettings {
     pub scrollbar: ScrollbarSettings,
     pub show_diagnostics: ShowDiagnostics,
     pub hide_root: bool,
+    pub collapse_roots: bool,
     pub hide_hidden: bool,
     pub drag_and_drop: bool,
     pub auto_open: AutoOpenSettings,
@@ -131,6 +132,7 @@ impl Settings for ProjectPanelSettings {
             },
             show_diagnostics: project_panel.show_diagnostics.unwrap(),
             hide_root: project_panel.hide_root.unwrap(),
+            collapse_roots: project_panel.collapse_roots.unwrap(),
             hide_hidden: project_panel.hide_hidden.unwrap(),
             drag_and_drop: project_panel.drag_and_drop.unwrap(),
             auto_open: {

@@ -4880,7 +4880,7 @@ fn window_and_layout_page() -> SettingsPage {
 }
 
 fn panels_page() -> SettingsPage {
-    fn project_panel_section() -> [SettingsPageItem; 29] {
+    fn project_panel_section() -> [SettingsPageItem; 30] {
         [
             SettingsPageItem::SectionHeader("Project Panel"),
             SettingsPageItem::SettingItem(SettingItem {
@@ -5354,6 +5354,29 @@ fn panels_page() -> SettingsPage {
                             .project_panel
                             .get_or_insert_default()
                             .hide_root = value;
+                    },
+                }),
+                metadata: None,
+                files: USER,
+            }),
+            SettingsPageItem::SettingItem(SettingItem {
+                title: "Collapse Roots",
+                description: "Whether to collapse worktree root entries on startup when more than one folder is open in the window.",
+                field: Box::new(SettingField {
+                    organization_override: None,
+                    json_path: Some("project_panel.collapse_roots"),
+                    pick: |settings_content| {
+                        settings_content
+                            .project_panel
+                            .as_ref()?
+                            .collapse_roots
+                            .as_ref()
+                    },
+                    write: |settings_content, value, _| {
+                        settings_content
+                            .project_panel
+                            .get_or_insert_default()
+                            .collapse_roots = value;
                     },
                 }),
                 metadata: None,

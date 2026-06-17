@@ -866,6 +866,9 @@
     // Whether to hide the root entry when only one folder is open in the window;
     // this also affects how file paths appear in the file finder history.
     "hide_root": false,
+    // Whether to collapse worktree root entries on startup when more than one
+    // folder is open in the window.
+    "collapse_roots": false,
     // Whether to hide the hidden entries in the project panel.
     "hide_hidden": false,
     // Settings for automatically opening files.

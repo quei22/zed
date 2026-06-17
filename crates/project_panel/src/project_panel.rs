@@ -4071,6 +4071,7 @@ impl ProjectPanel {
             .collect();
         let hide_root = settings.hide_root && visible_worktrees.len() == 1;
         let hide_hidden = settings.hide_hidden;
+        let collapse_roots = settings.collapse_roots && visible_worktrees.len() > 1;
 
         let visible_entries_task = cx.spawn_in(window, async move |this, cx| {
             let new_state = cx
@@ -4268,7 +4269,11 @@ impl ProjectPanel {
                                         // The first time a worktree's root entry becomes available,
                                         // mark that root entry as expanded.
                                         if let Some(entry) = worktree_snapshot.root_entry() {
-                                            e.insert(vec![entry.id]).as_slice()
+                                            if collapse_roots {
+                                                e.insert(Vec::new()).as_slice()
+                                            } else {
+                                                e.insert(vec![entry.id]).as_slice()
+                                            }
                                         } else {
                                             &[]
                                         }

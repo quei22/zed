@@ -788,6 +788,11 @@ pub struct ProjectPanelSettingsContent {
     ///
     /// Default: false
     pub hide_root: Option<bool>,
+    /// Whether to collapse worktree root entries on startup when more than one
+    /// folder is open in the window.
+    ///
+    /// Default: false
+    pub collapse_roots: Option<bool>,
     /// Whether to hide the hidden entries in the project panel.
     ///
     /// Default: false
